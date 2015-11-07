@@ -1,0 +1,53 @@
+Question1: 
+  Find the titles of all movies directed by Steven Spielberg.
+  
+  select title //return title attribute
+  from Movie //query over Movie table
+  where director = 'Steven Spielberg' //filter out records where director does not = Steven Spielberg
+  
+  Query result: Correct
+  E.T.
+  Raiders of the Lost Ark
+
+QUESTION2: 
+  Find all years that have a movie that received a rating of 4 or 5, and sort them in increasing order.
+
+  select distinct year //return year attribute and get rid of duplicate values using the DISTINCT operator
+  from Movie, Rating //query over the Movie and Rating tables
+  where Movie.mID = Rating.mID and stars >= 4 //combine Movie and Rating relations where mID are equal and stars are > or = to 4
+
+Question3: 
+  Return all titles of movies that have no ratings.
+  
+  select distinct title  //return the title attribute and only dont return duplicate values
+  from Movie   //do a query over the table name
+  except  //returns all of the rows in the first query that are not returned in the second query
+  select distinct title
+  from Movie, Rating  //join Movie table and Rating table
+  where Movie.mID = Rating.mID  //combine the Movie and Rating records with the same mID numbers 
+  
+ 1st part of the query returns:
+  
+  Avatar
+  E.T.
+  Gone with the Wind
+  Raiders of the Lost Ark
+  Snow White
+  Star Wars
+  The Sound of Music
+  Titanic
+  
+  2nd part of the query returns:
+  Avatar
+  E.T.
+  Gone with the Wind
+  Raiders of the Lost Ark
+  Snow White
+  The Sound of Music
+  
+  the except operator tells it to return the rows in the first query that are not in the second query
+  
+  Query reult: correct
+  
+  Star Wars
+  Titanic 
