@@ -19,7 +19,7 @@ QUESTION2:
 Question3: 
   Return all titles of movies that have no ratings.
   
-  select distinct title  //return the title attribute and only dont return duplicate values
+  select distinct title  //return the title attribute and dont return duplicate values
   from Movie   //do a query over the table name
   except  //returns all of the rows in the first query that are not returned in the second query
   select distinct title
@@ -51,3 +51,11 @@ Question3:
   
   Star Wars
   Titanic 
+
+Question 4:
+Find the names of all reviewers who have ratings with a NULL value for the date.
+
+select name //return the name attribute
+from Reviewer, Rating //query over the Reviewer and Rating tables
+where Reviewer.rID = Rating.rID and ratingDate is NULL //combine Reviewer and Rating rID that are the same and that have NULL values
+                                                      //remember to use 'is' instead of = when asking for NULL values
