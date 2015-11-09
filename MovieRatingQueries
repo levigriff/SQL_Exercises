@@ -79,7 +79,7 @@ Your Query Result: Correct!
   Brittany Harris	Raiders of the Lost Ark	4	2011-01-12
   Brittany Harris	The Sound of Music	2	2011-01-20
   Chris Jackson	E.T.	2	2011-01-22
-  Chris Jackson	Raiders of the Lost Ark	4	<NULL>
+  Chris Jackson	Raiders of the Lost Ark	4	<NULL> 
   Chris Jackson	The Sound of Music	3	2011-01-27
   Daniel Lewis	Snow White	4	<NULL>
   Elizabeth Thomas	Avatar	3	2011-01-15
@@ -89,3 +89,33 @@ Your Query Result: Correct!
   Sarah Martinez	Gone with the Wind	2	2011-01-22
   Sarah Martinez	Gone with the Wind	4	2011-01-27
 
+Question 6:
+For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, 
+return the reviewer's name and the title of the movie. 
+
+  select name, title
+  from Reviewer, Movie, Rating, Rating r2 //join Rating relation with itself and join to Movie and Reviewer <insert explanation here>
+  where Rating.mID=Movie.mID and Reviewer.rID=Rating.rID //keep only one set of mIDs and rIDs
+    and Rating.rID = r2.rID and r2.mID = Movie.mID
+    and Rating.stars < r2.stars and Rating.ratingDate < r2.ratingDate //keep the stars that are higher value and keep only the date that is the later date
+
+Your Query Result: Correct!
+  Sarah Martinez	Gone with the Wind
+
+Question 7:
+For each movie that has at least one rating, find the highest number of stars that movie received.
+Return the movie title and number of stars. Sort by movie title.
+  
+  select title,max(stars) 
+  from Movie, Rating 
+  where Movie.mID=Rating.mID 
+  group by Rating.mID 
+  order by title 
+
+Your Query Result: Correct!
+  Avatar	5
+  E.T.	3
+  Gone with the Wind	4
+  Raiders of the Lost Ark	4
+  Snow White	5
+  The Sound of Music	3
